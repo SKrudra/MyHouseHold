@@ -1,0 +1,18 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory name="foo">
+		<property name="show_sql">true</property>
+		<property name="format_sql">true</property>
+		<property name="hibernate.hbm2ddl.auto">update</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.HSQLDialect</property>
+		<property name="hibernate.connection.driver_class">org.hsqldb.jdbcDriver</property>
+		<property name="hibernate.connection.username">sa</property>
+		<property name="hibernate.connection.password">Hallmark1</property>
+		<property name="hibernate.connection.url">jdbc:hsqldb:file:E:\hsqldb-2.3.3\MYHSQLDB;hsqldb.lock_file=false</property>
+		<!-- <property name="hibernate.connection.url">jdbc:hsqldb:file:mysql:./build/db/hsqldb/hibernate</property> -->
+		<mapping resource="Commodity.hbm.xml"/>
+	</session-factory>
+</hibernate-configuration>

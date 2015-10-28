@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-lazy="false">
+
+	<class name="com.bomman.house.bean.Commodity" table="COMMODITY">
+		<id name="id" column="ID" unsaved-value="null">
+			<generator class="increment" />
+		</id>
+		<property name="items" column="ITEMS" />
+		<property name="cost" column="COST" />
+		<property name="buyer" column="BUYER" />
+		<property name="date" column="BOUGHT_ON" />
+	</class>
+</hibernate-mapping>
