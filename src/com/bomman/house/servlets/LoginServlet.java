@@ -29,11 +29,9 @@ public class LoginServlet extends HttpServlet {
 		user.setUsername(username);
 		user.setPassword(password);
 		try {
-			System.out.println("req : " +req);
 			if (dao.authenticate(user)) {
 				RequestDispatcher dispatcher = req
 						.getRequestDispatcher("./home");
-				System.out.println("Dispatcher 1 : " +dispatcher);
 				dispatcher.forward(req, resp);
 			} else {
 				RequestDispatcher dispatcher = req
@@ -43,10 +41,8 @@ public class LoginServlet extends HttpServlet {
 				dispatcher.forward(req, resp);
 			}
 		} catch (Exception e) {
-			System.out.println("error" +e.getMessage());
 			RequestDispatcher dispatcher = req
 					.getRequestDispatcher("./login.jsp");
-			System.out.println("Dispatcher 2 : " +dispatcher);
 			req.setAttribute("error",
 					"We are experiencing some internal issue, please try after some time.");
 			dispatcher.forward(req, resp);

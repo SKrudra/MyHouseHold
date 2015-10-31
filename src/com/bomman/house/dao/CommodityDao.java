@@ -45,7 +45,6 @@ public class CommodityDao {
 				.getSession()
 				.createSQLQuery(
 						"select buyer,sum(cost) as amount from commodity group by buyer");
-		System.out.println(query);
 		query.addScalar("buyer", new StringType());
 		query.addScalar("amount", new DoubleType());
 

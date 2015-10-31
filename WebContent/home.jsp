@@ -41,7 +41,7 @@
 </head>
 <body style="align: center">
 	<h1>Bomman House Hold</h1>
-	<%=session.getAttribute("username")%>|
+	<%=session.getAttribute("username")%> |
 	<a href="./logout">Log Out</a>
 	<div id="navigation" style="float: left;">
 		<ul class="nav">
