@@ -12,6 +12,7 @@
 	href="https://cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css" /> -->
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.datatables.net/r/ju-1.11.4/jqc-1.11.3,dt-1.10.8/datatables.min.css" />
+<link rel="stylesheet" type="text/css" href="./media/runnable.css">
 <script src="https://code.jquery.com/jquery-1.11.3.min.js"
 	type="text/javascript"></script>
 <script
@@ -24,11 +25,16 @@
 			"sPaginationType" : "full_numbers",
 			"bJQueryUI" : true
 		});
+		$('.nav li').hover(function() {
+			$('ul', this).fadeIn();
+		}, function() {
+			$('ul', this).fadeOut();
+		});
 	});
 	$(document).ready(function() {
-		 	if(session.getAttribute("username")==null){
-				window.location("./login.jsp");
-			} 
+		if (session.getAttribute("username") == null) {
+			window.location("./login.jsp");
+		}
 	});
 </script>
 <title>Bomman House Hold</title>
@@ -37,98 +43,116 @@
 	<h1>Bomman House Hold</h1>
 	<%=session.getAttribute("username")%>|
 	<a href="./logout">Log Out</a>
-	<form action="./addRecord" method="post">
-		<table>
-			<tr>
-				<td>List of Items</td>
-				<td><textarea rows="3" cols="10" name="items"></textarea>
-			</tr>
-			<tr>
-				<td>Total Cost</td>
-				<td><input type="text" name="cost" required="required" /></td>
-			</tr>
-			<tr>
-				<td>Buyer</td>
-				<td><select name="buyer">
-						<option value="">Select Buyer</option>
-						<option value="Venkatesh">Venkatesh</option>
-						<option value="Sandeep">Sandeep</option>
-				</select></td>
-			</tr>
-			<tr>
-				<td>Date</td>
-				<td><input type="date" name="date" required="required" /></td>
-			</tr>
-			<tr>
-				<td><input type="submit" name="submit" value="submit" /></td>
-			</tr>
+	<div id="navigation" style="float: left;">
+		<ul class="nav">
+			<li><a href="#">Home</a></li>
+			<li><a href="#">Services</a>
+				<ul>
+					<li><a href="#">iPhone</a></li>
+					<li><a href="#">Android</a></li>
+				</ul></li>
+			<li><a href="#">About Us</a>
+				<ul>
+					<li><a href="#">Vision</a></li>
+					<li><a href="#">Contact us</a></li>
+				</ul></li>
+		</ul>
+	</div>
+	<div id="addRecord" style="float: left; clear: left;">
+		<form action="./addRecord" method="post">
+			<table>
+				<tr>
+					<td>List of Items</td>
+					<td><textarea rows="3" cols="10" name="items"></textarea>
+				</tr>
+				<tr>
+					<td>Total Cost</td>
+					<td><input type="text" name="cost" required="required" /></td>
+				</tr>
+				<tr>
+					<td>Buyer</td>
+					<td><select name="buyer">
+							<option value="">Select Buyer</option>
+							<option value="Venkatesh">Venkatesh</option>
+							<option value="Sandeep">Sandeep</option>
+					</select></td>
+				</tr>
+				<tr>
+					<td>Date</td>
+					<td><input type="date" name="date" required="required" /></td>
+				</tr>
+				<tr>
+					<td><input type="submit" name="submit" value="submit" /></td>
+				</tr>
+			</table>
+		</form>
+	</div>
 
-		</table>
-	</form>
-	<hr>
-	<div id="sandeep" style="display: table-cell">
-		<%
-			Map<String, Double> map = (Map<String, Double>) session
-					.getAttribute("individual");
-		%>
-		<table>
-			<tr>
-				<td><img alt="sandeep" src="./sandeep.jpg" height="100px"
-					width="100px" title="Sandeep" /></td>
-			</tr>
-			<tr>
-				<td>Investment : <%=map.get("Sandeep")%></td>
-			</tr>
-			<tr>
-				<td>Liability: <%=session.getAttribute("sLiability")%></td>
-			</tr>
-		</table>
-	</div>
-	<div id="container" style="display: table-cell">
-		<table id="myDataTable" class="display" cellspacing="0" width="100%">
-			<thead>
+	<div id="container" style="float: left; clear: left; border-top: 1px solid #069;">
+		<div id="sandeep" style="display: table-cell">
+			<%
+				Map<String, Double> map = (Map<String, Double>) session
+						.getAttribute("individual");
+			%>
+			<table>
 				<tr>
-					<th>ID</th>
-					<th>ITEMS</th>
-					<th>COST</th>
-					<th>BUYER</th>
-					<th>DATE</th>
+					<td><img alt="sandeep" src="./sandeep.jpg" height="100px"
+						width="100px" title="Sandeep" /></td>
 				</tr>
-			</thead>
-			<tbody>
-				<%
-					List<Commodity> commodities = (List<Commodity>) session
-							.getAttribute("commodity");
-					if (commodities != null) {
-						for (Commodity commodity : commodities) {
-				%>
 				<tr>
-					<td><%=commodity.getId()%></td>
-					<td><%=commodity.getItems()%></td>
-					<td><%=commodity.getCost()%></td>
-					<td><%=commodity.getBuyer()%></td>
-					<td><%=commodity.getDate()%></td>
+					<td>Investment : <%=map.get("Sandeep")%></td>
 				</tr>
-				<%
-					}
-					}
-				%>
-			</tbody>
-		</table>
-	</div>
-	<div id="venkatesh" style="display: table-cell">
-		<table>
-			<tr>
-				<td><img alt="venkatesh" src="./venkatesh.jpg" height="100px"
-					width="100px" title="Venkatesh" /></td>
-			</tr>
-			<tr>
-				<td>Investment : <%=map.get("Venkatesh")%></td>
-			</tr>
-			<tr>
-				<td>Liability: <%=session.getAttribute("vLiability")%></td>
-			</tr>
-		</table>
+				<tr>
+					<td>Liability: <%=session.getAttribute("sLiability")%></td>
+				</tr>
+			</table>
+		</div>
+		<div style="display: table-cell">
+			<table id="myDataTable" class="display" cellspacing="0" width="100%">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>ITEMS</th>
+						<th>COST</th>
+						<th>BUYER</th>
+						<th>DATE</th>
+					</tr>
+				</thead>
+				<tbody>
+					<%
+						List<Commodity> commodities = (List<Commodity>) session
+								.getAttribute("commodity");
+						if (commodities != null) {
+							for (Commodity commodity : commodities) {
+					%>
+					<tr>
+						<td><%=commodity.getId()%></td>
+						<td><%=commodity.getItems()%></td>
+						<td><%=commodity.getCost()%></td>
+						<td><%=commodity.getBuyer()%></td>
+						<td><%=commodity.getDate()%></td>
+					</tr>
+					<%
+						}
+						}
+					%>
+				</tbody>
+			</table>
+		</div>
+		<div id="venkatesh" style="display: table-cell">
+			<table>
+				<tr>
+					<td><img alt="venkatesh" src="./venkatesh.jpg" height="100px"
+						width="100px" title="Venkatesh" /></td>
+				</tr>
+				<tr>
+					<td>Investment : <%=map.get("Venkatesh")%></td>
+				</tr>
+				<tr>
+					<td>Liability: <%=session.getAttribute("vLiability")%></td>
+				</tr>
+			</table>
+		</div>
 	</div>
 </body>
 </html>
